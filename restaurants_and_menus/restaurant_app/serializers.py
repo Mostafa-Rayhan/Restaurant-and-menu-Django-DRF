@@ -23,6 +23,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(many=True)
+    stripe_payment_intent = serializers.CharField(max_length=255, read_only=True)
 
     class Meta:
         model = Order

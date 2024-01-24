@@ -142,3 +142,7 @@ REST_FRAMEWORK = {
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
     ),
 }
+
+
+STRIPE_PUBLIC_KEY = 'pk_test_51NFZaRCC3Q58MljGXgOxkeQHlXIKJ6x7A8McOI46ZseX0W0nC6tcEIjN44o53bNFQpSQoTYSIViNr4n9pfaZNH3s00ykAoXv21'
+STRIPE_SECRET_KEY = 'sk_test_51NFZaRCC3Q58MljGkvpqh96eHmAhrgzTt9kHVXJaZgtOwfLY7e6Qb2BjX6So65GKLM5PfS5bcm8VXlIzeaIHkIqw002h77zEfe'

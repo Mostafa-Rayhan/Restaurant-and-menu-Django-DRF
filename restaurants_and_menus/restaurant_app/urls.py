@@ -5,6 +5,7 @@ from .views import (
     MenuListCreateView, MenuDetailView,
     MenuItemListCreateView, MenuItemDetailView,
     OrderListCreateView, OrderDetailView,
+    PaymentIntentView,
 )
 
 urlpatterns = [
@@ -19,4 +20,6 @@ urlpatterns = [
 
     path('orders/', OrderListCreateView.as_view(), name='order-list-create'),
     path('orders/<int:pk>/', OrderDetailView.as_view(), name='order-detail'),
+
+    path('payment-intent/', PaymentIntentView.as_view(), name='payment-intent'),
 ]
