@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'social_django.middleware.SocialAuthMiddleware',
+    # 'social_django.middleware.SocialAuthMiddleware',
 ]
 
 ROOT_URLCONF = 'restaurants_and_menus.urls'
