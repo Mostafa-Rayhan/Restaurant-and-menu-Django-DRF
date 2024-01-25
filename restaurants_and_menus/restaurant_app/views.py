@@ -1,6 +1,7 @@
 
 from django.conf import settings
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 from .models import Restaurant, Menu, MenuItem, Order
 from .serializers import RestaurantSerializer, MenuSerializer, MenuItemSerializer, OrderSerializer
 
@@ -11,51 +12,83 @@ import stripe
 
 class RestaurantListCreateView(generics.ListCreateAPIView):
     serializer_class = RestaurantSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Restaurant.objects.filter(owner=self.request.user)
+        if self.request.user.is_authenticated:
+            return Restaurant.objects.filter(owner=self.request.user)
+        else:
+            return Restaurant.objects.none()
 
 class RestaurantDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = RestaurantSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Restaurant.objects.filter(owner=self.request.user)
+        if self.request.user.is_authenticated:
+            return Restaurant.objects.filter(owner=self.request.user)
+        else:
+            return Restaurant.objects.none()
 
 class MenuListCreateView(generics.ListCreateAPIView):
     serializer_class = MenuSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Menu.objects.filter(restaurant__owner=self.request.user)
+        if self.request.user.is_authenticated:
+            return Menu.objects.filter(restaurant__owner=self.request.user)
+        else:
+            return Menu.objects.none()
 
 class MenuDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MenuSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Menu.objects.filter(restaurant__owner=self.request.user)
+        if self.request.user.is_authenticated:
+            return Menu.objects.filter(restaurant__owner=self.request.user)
+        else:
+            return Menu.objects.none()
 
 class MenuItemListCreateView(generics.ListCreateAPIView):
     serializer_class = MenuItemSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return MenuItem.objects.filter(menu__restaurant__owner=self.request.user)
+        if self.request.user.is_authenticated:
+            return MenuItem.objects.filter(menu__restaurant__owner=self.request.user)
+        else:
+            return MenuItem.objects.none()
 
 class MenuItemDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MenuItemSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return MenuItem.objects.filter(menu__restaurant__owner=self.request.user)
+        if self.request.user.is_authenticated:
+            return MenuItem.objects.filter(menu__restaurant__owner=self.request.user)
+        else:
+            return MenuItem.objects.none()
 
 class OrderListCreateView(generics.ListCreateAPIView):
     serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Order.objects.filter(user=self.request.user)
+        if self.request.user.is_authenticated:
+            return Order.objects.filter(user=self.request.user)
+        else:
+            return Order.objects.none()
 
 class OrderDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Order.objects.filter(user=self.request.user)
+        if self.request.user.is_authenticated:
+            return Order.objects.filter(user=self.request.user)
+        else:
+            return Order.objects.none()
     
 # Stripe API Integration
 class PaymentIntentView(APIView):
